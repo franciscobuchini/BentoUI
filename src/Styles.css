@@ -18,10 +18,10 @@
   font-style: medium;
 }
 @font-face {
-  font-family: Garnett;
-  src: url(/src/Fonts/Garnett-Semibold.ttf);
-  font-weight: 700;
-  font-style: bold;
+  font-family: Coustard;
+  src: url(/src/Fonts/Coustard-Black.ttf);
+  font-weight: 900;
+  font-style: bolder;
 }
 /* FONTS -----------------------------------*/
 
@@ -61,6 +61,8 @@ html, body {
   --size: 80px;
   --gap: 20px;
   --bentogridsize: calc(var(--bentosize) * 8 + var(--gap) * 9);
+  --bentoradius: 32px;
+  --bentogridradius: calc(var(--bentoradius) + var(--gap));
   @media (width > 770px) {--bentosize: 130px;}
   @media (width <= 770px) {--bentosize: 90px;}
 }
@@ -68,7 +70,10 @@ html, body {
 
 /* TEXT -----------------------------------*/
 
-h1 {margin: var(--gap);}
+h1, span {
+  font-size: 2rem;
+  font-family: Coustard;
+}
 
 h2 {}
 
@@ -119,7 +124,7 @@ header > div {
   transform: translateX(-50%);
   font-weight: 500;
   padding: var(--gap);
-  border-radius: 100px;
+  border-radius: var(--bentogridradius);
 }
 
 .Nav > ul {
@@ -153,6 +158,8 @@ footer {
 
 .Article .TextArticle {
   text-align: center;
+  margin: var(--gap);
+  gap: calc(var(--gap) / 2);
 }
 
 .Bento:hover > .ImageBack {
@@ -212,7 +219,7 @@ footer {
 .BentoGrid {
   z-index: 500;
   width: 100%;
-  border-radius: calc(32px + var(--gap));
+  border-radius: var(--bentogridradius);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(var(--bentosize), 1fr));
   grid-auto-flow: dense;
@@ -224,12 +231,11 @@ footer {
 .Bento {
   display: flex;
   flex-direction: column;
-  position: relative;
 }
 
 .Bento, .MapComponent {
   transition: 0.2s;
-  border-radius: 32px;
+  border-radius: var(--bentoradius);
   position: relative;
 }
 

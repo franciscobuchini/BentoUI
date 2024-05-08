@@ -1,7 +1,7 @@
 // BENTO.JSX
 import React from 'react'
 
-export default function Bento({ Bv, Bh, Bs, Bbg, Lurl, Th, Tp, Tc, IBimg, IDimg, IFimg, Limg, Com, PBn, PBd, Bt }) {
+export default function Bento({ Bv, Bh, Bs, Bbg, Lurl, Th4, Tp, Tc, IBimg, IDimg, IFimg, Limg, Com, PBn, PBd, Bt }) {
 
   // If background is transparent this means: no interaction if hover the Bento.
   let classNameBento = `Bento ${Bbg === 'transparent' ? 'Transparent' : ''} ${Bs} V${Bv} H${Bh}`
@@ -25,16 +25,18 @@ export default function Bento({ Bv, Bh, Bs, Bbg, Lurl, Th, Tp, Tc, IBimg, IDimg,
       {IDimg && <img className='Image ImageDispel' src={IDimg}/>}
       {IFimg && <img className='Image ImageFront' src={IFimg}/>}
 
-      {(Th || Tp || Limg) && (
+      {(Th4 || Tp || Limg) && (
         <div className='Text' style={{
           height: Com ? 'auto' : '100%',
           width: Com ? 'auto' : '100%',          
         }}>
+        {Limg && (
           <div className='Limg'>
             <img src={Limg}/>
           </div>
-          <h4 style={{color: `var(--${Tc})`}}>{Th}</h4>
-          <p style={{color: `var(--${Tc})`}}>{Tp}</p>
+        )}
+          <h4 style={{color: `var(--${Tc})`}}>{Th4}</h4>
+          <p dangerouslySetInnerHTML={{ __html: Tp }} style={{color: `var(--${Tc})`}} />
         </div>
       )}
 
@@ -59,7 +61,7 @@ Bsize: Bento - Size [look at Dimensions.css]
 Bstyle: Bento - Style [B1, B2, B3, B4, B5, B6, B7, B8]
 Bbg: Bento - Background Color
 
-Th: Text - <H2>
+Th4: Text - <H2>
 Tp: Text - <P>
 
 IBimg: Image Back - Image
