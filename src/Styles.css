@@ -18,9 +18,9 @@
   font-style: medium;
 }
 @font-face {
-  font-family: Coustard;
-  src: url(/src/Fonts/Coustard-Black.ttf);
-  font-weight: 900;
+  font-family: Garnett;
+  src: url(/src/Fonts/Garnett-Semibold.ttf);
+  font-weight: 700;
   font-style: bolder;
 }
 /* FONTS -----------------------------------*/
@@ -70,9 +70,9 @@ html, body {
 
 /* TEXT -----------------------------------*/
 
-h1, span {
+h1 {
   font-size: 2rem;
-  font-family: Coustard;
+  padding-bottom: var(--gap);
 }
 
 h2 {}
