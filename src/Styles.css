@@ -72,7 +72,7 @@ html, body {
 
 h1 {
   font-size: 2rem;
-  padding-bottom: var(--gap);
+  padding: var(--gap);
 }
 
 h2 {}
