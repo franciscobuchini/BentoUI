@@ -6,8 +6,8 @@ export default function Bento({ Bv, Bh, Bs, Bbg, Lurl, Th4, Tp, Tc, IBimg, IDimg
   // If background is transparent this means: no interaction if hover the Bento.
   let classNameBento = `Bento ${Bbg === 'transparent' ? 'Transparent' : ''} ${Bs} V${Bv} H${Bh}`
 
-  // Open link in new tab if Lurl exists and component is not a button
-  let link = Com !== 'Button' && Lurl ? () => window.open(Lurl, '_blank') : undefined
+  // Open link in new tab only if Lurl exists and component is a button
+  let link = Com === "Button" && Lurl ? () => window.open(Lurl, "_blank") : undefined;
 
   // Calcular el porcentaje completado
   const percentage = (PBn / PBd) * 100;
