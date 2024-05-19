@@ -1,57 +1,64 @@
 // BENTO.JSX
-import React from 'react'
+import React from "react"
 
-export default function Bento({ Bv, Bh, Bs, Bbg, Lurl, Th4, Tp, Tc, IBimg, IDimg, IFimg, Limg, Com, PBn, PBd, Bt }) {
+export default function Bento({ id, Bv, Bh, Bs, Bbgc, Bbgi, Outc, Lurl, Th4, Tp, Th4c, Tpc, IBimg, IDimg, IFimg, Limg, Com, PBn, PBd, Bt }) {
 
   // If background is transparent this means: no interaction if hover the Bento.
-  let classNameBento = `Bento ${Bbg === 'transparent' ? 'Transparent' : ''} ${Bs} V${Bv} H${Bh}`
+  let classNameBento = `Bento ${Bbgc === "transparent" ? "Transparent" : ""} ${Bs} V${Bv} H${Bh}`
 
-  // Open link in new tab only if Lurl exists and component is a button
-  let link = Com === "Button" && Lurl ? () => window.open(Lurl, "_blank") : undefined;
+  // Manejar el click en el botón o en el componente Bento
+  const handleClick = () => {
+    if (Lurl && Com === "Button") {
+      window.open(Lurl, "_blank")
+    } else if (Lurl && !Com) {
+      window.open(Lurl, "_blank")
+    }
+  }
 
   // Calcular el porcentaje completado
   const percentage = (PBn / PBd) * 100;
 
   return (
     <section
+      id={id}
       className={classNameBento}
-      onClick={link}
+      onClick={handleClick}
       style={{
-        ...(Bbg && { backgroundColor: `var(--${Bbg})` }),
-        cursor: link ? 'pointer' : 'auto',
+        ...(Outc && { outline: `solid ${Outc}` }),
+        ...(Bbgc && { backgroundColor: `${Bbgc}` }),
+        ...(Bbgi && { backgroundImage: `${Bbgi}` }),
+        cursor: Lurl && !Com ? "pointer" : "auto"
       }}>
 
-      {IBimg && <img className='Image ImageBack' src={IBimg}/>}
-      {IDimg && <img className='Image ImageDispel' src={IDimg}/>}
-      {IFimg && <img className='Image ImageFront' src={IFimg}/>}
+      {IBimg && <img className="Image ImageBack" src={IBimg} title={IBimg} alt={IBimg} loading="lazy"/>}
+      {IDimg && <img className="Image ImageDispel" src={IDimg} title={IBimg} alt={IBimg} loading="lazy"/>}
+      {IFimg && <img className="Image ImageFront" src={IFimg} title={IBimg} alt={IBimg} loading="lazy"/>}
 
-      {(Th4 || Tp || Limg) && (
-        <div className='Text' style={{
-          height: Com ? 'auto' : '100%',
-          width: Com ? 'auto' : '100%',          
-        }}>
+      <div className="Statement">
         {Limg && (
-          <div className='Limg'>
-            <img src={Limg}/>
-          </div>
+          <picture className='Limg'>
+            <img src={Limg} title={Limg} alt={Limg} loading="lazy"/>
+          </picture>
         )}
-          <h4 style={{color: `var(--${Tc})`}}>{Th4}</h4>
-          <p dangerouslySetInnerHTML={{ __html: Tp }} style={{color: `var(--${Tc})`}} />
+        <div className="Text">
+          <h4 style={{color: `${Th4c}`}}>{Th4}</h4>
+          <p style={{color: `${Tpc}`}} dangerouslySetInnerHTML={{ __html: Tp }} />
         </div>
-      )}
+      </div>
 
       {PBd && ( // Only render the progress bar if PBd exists
-        <div className='PB'>
-          <div className='PB100'> </div>
-          <div className='PBX' style={{ width: `${percentage}%`}}></div>
+        <div className="PB">
+          <div className="PBd"> </div>
+          <div className="PBn" style={{ width: `${percentage}%`}}></div>
         </div>
       )}
       
       {Com && ( // Add the custom component
-        <div className='Component'>
-          {React.createElement(Com, { Lurl, Bt, Tc })}
+        <div className="Component">
+          {React.createElement(Com, { Lurl, Bt })}
         </div>
       )}
+      
     </section>
   )
 }
@@ -59,7 +66,7 @@ export default function Bento({ Bv, Bh, Bs, Bbg, Lurl, Th4, Tp, Tc, IBimg, IDimg
 /* 
 Bsize: Bento - Size [look at Dimensions.css]
 Bstyle: Bento - Style [B1, B2, B3, B4, B5, B6, B7, B8]
-Bbg: Bento - Background Color
+Bbgc: Bento - Background Color
 
 Th4: Text - <H2>
 Tp: Text - <P>

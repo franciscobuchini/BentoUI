@@ -1,4 +1,5 @@
 /* FONTS -----------------------------------*/
+
 @font-face {
   font-family: Garnett;
   src: url(/src/Fonts/Garnett-Light.ttf);
@@ -7,25 +8,21 @@
 }
 @font-face {
   font-family: Garnett;
-  src: url(/src/Fonts/Garnett-Regular.ttf);
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: Garnett;
   src: url(/src/Fonts/Garnett-Medium.ttf);
   font-weight: 500;
   font-style: medium;
 }
 @font-face {
-  font-family: Garnett;
-  src: url(/src/Fonts/Garnett-Semibold.ttf);
-  font-weight: 700;
+  font-family: Coustard;
+  src: url(/src/Fonts/Coustard-Black.ttf);
+  font-weight: 900;
   font-style: bolder;
 }
+
 /* FONTS -----------------------------------*/
 
 /* NORMALIZE -----------------------------------*/
+
 * {
   font-family: Garnett;
   box-sizing: border-box;
@@ -36,10 +33,9 @@
   text-wrap: pretty;
   list-style-type: none;
   border: none;
-  overflow: hidden;
   letter-spacing: 1px;
-  line-height: 24px;
   color: inherit;
+  overflow: hidden;
 }
 
 *:focus {
@@ -58,33 +54,54 @@ html, body {
   align-items: center;
   height: min-content;
   width: 100%;
-  --size: 80px;
-  --gap: 20px;
-  --bentogridsize: calc(var(--bentosize) * 8 + var(--gap) * 9);
-  --bentoradius: 32px;
+
+  --bentogridsize: calc(var(--bentosizehorizontal) * 8 + var(--gap) * 9);
   --bentogridradius: calc(var(--bentoradius) + var(--gap));
-  @media (width > 770px) {--bentosize: 130px;}
-  @media (width <= 770px) {--bentosize: 90px;}
+
+  @media (width > 833px) {
+    --bentosizevertical: 110px; 
+    --bentosizehorizontal: 110px;
+    --size: 40px;
+    --bentoradius: 32px;
+    --gap: 16px;
+    --negativegap: -16px;
+  }
+
+  @media (width > 1020px) {
+    --bentosizevertical: 130px; 
+    --bentosizehorizontal: 130px;
+    --gap: 20px;
+    --negativegap: -20px;
+  }
+
+  @media (width <= 833px) {
+    --bentosizevertical: 96px; 
+    --bentosizehorizontal: 96px; 
+    --size: 40px;
+    --bentoradius: 16px;
+    --gap: 20px;
+    --negativegap: -20px;
+  }
+
+  @media (width <= 530px) {
+    --size: 30px;
+    --gap: 10px;
+    --negativegap: -10px;
+  }
 }
+
 /* NORMALIZE -----------------------------------*/
 
 /* TEXT -----------------------------------*/
 
-h1 {
-  font-size: 2rem;
-  padding: var(--gap);
-}
+h1, span {font-family: Coustard;}
 
-h2 {}
-
-h3 {}
-
-h4 {}
-
-p {font-size: 0.8rem;}
+p { word-wrap: break-word;}
 
 a {cursor: pointer; font-weight: lighter;}
-.Button, .Download {font-size: 0.8rem;}
+
+.Button, .Download > span {font-family: Garnett;}
+
 /* TEXT -----------------------------------*/
 
 /* OUTSIDE -----------------------------------*/
@@ -148,21 +165,35 @@ footer {
 /* BENTO -----------------------------------*/
 
 .Article {
-  margin: 100px 0;
   display: flex;
   flex-direction: column;
   width: 100%;
   align-items: center;
+}
+
+.Article > .TextArticle {
+  text-align: center;
   gap: var(--gap);
 }
 
-.Article .TextArticle {
-  text-align: center;
-  margin: var(--gap);
+.BentoGrid {
+  z-index: 500;
+  width: 100%;
+  border-radius: var(--bentogridradius);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--bentosizehorizontal), 1fr));
+  grid-gap: var(--gap);
+  padding: var(--gap);
+  max-width: var(--bentogridsize);
+}
+
+.Bento {
+  display: flex;
+  flex-direction: column;
   gap: calc(var(--gap) / 2);
 }
 
-.Bento:hover > .ImageBack {
+.Bento:hover > .ImageFront {
   transform: scale(1.05);
 }
 
@@ -172,19 +203,13 @@ footer {
   opacity: 0;
 }
 
-.Component {
+.Bento > .Component {
   display: flex;
-  min-height: calc(var(--size) / 2);
+  min-height: var(--size);
   z-index: 300;
-  padding: calc(var(--gap)/2) var(--gap) var(--gap) var(--gap);
 }
 
-.Text {
-  z-index: 500;
-  padding: var(--gap) var(--gap) calc(var(--gap)/2) var(--gap);
-}
-
-.Image {
+.Bento > .Image {
   position: absolute;
   object-fit: cover;
   object-position: center;
@@ -194,52 +219,92 @@ footer {
   transition: transform 2.5s ease;
 }
 
-.Text .Limg img {
-  width: 50px;
+.Bento > .Statement {
+  display: flex;
+  flex-direction: column;
+  z-index: 500;
+  gap: var(--gap);
 }
 
-.PB {
+.Bento > .Statement > .Text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  row-gap: 2px;
+}
+
+.Bento > .Statement > .Limg {
+  display: flex;
+  min-width: var(--size);
+  flex-shrink: 0;
+  justify-content: center;
+}
+
+.Bento > .Statement > .Limg > img {
+  max-width: 100%;
+  width: auto;
+  height: var(--size);
+}
+
+#Presentation > .Statement > .Limg > img {
+  height: auto;
+}
+
+.Bento > .PB {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: calc(100% - var(--gap) * 2);
-  min-height: 10px;
-  margin: 0 var(--gap) var(--gap) var(--gap);
 }
 
-.PB100,
-.PBX {
+.PBd,
+.PBn {
   height: 100%;
   position: absolute;
   left: 0;
-  width: 100%;
   border-radius: 5px;
 }
 
-.BentoGrid {
-  z-index: 500;
-  width: 100%;
-  border-radius: var(--bentogridradius);
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(var(--bentosize), 1fr));
-  grid-auto-flow: dense;
-  grid-gap: var(--gap);
-  padding: var(--gap);
-  max-width: var(--bentogridsize);
-}
-
-.Bento {
-  display: flex;
-  flex-direction: column;
-}
-
-.Bento, .MapComponent {
-  transition: 0.2s;
-  border-radius: var(--bentoradius);
-  position: relative;
-}
+.PBd {width: 100%;}
 
 /* BENTO -----------------------------------*/
+
+.Bento, .MapComponent {
+  border-radius: var(--bentoradius);
+  position: relative;
+  padding: var(--gap);
+}
+
+.MapComponent > .Map, .Image {
+  margin: var(--negativegap);
+}
+
+/* MAP -----------------------------------*/
+
+.MapComponent:hover > .Text {
+  display: none;
+}
+
+.MapComponent .Map {
+ z-index: 100;
+ height: 100%;
+ width: 100%;
+ position: absolute;
+ object-fit: cover;
+ object-position: center;
+}
+
+.MapComponent .Map div.mapboxgl-ctrl-bottom-right,
+.MapComponent .Map div.mapboxgl-ctrl-bottom-left {
+ display: none;
+}
+
+.MapComponent > .Text {
+ position: absolute;
+ top: var(--gap);
+ z-index: 500;
+}
+
+/* MAP -----------------------------------*/
 
 /* BENTO SIZES -----------------------------------*/
 
@@ -252,41 +317,49 @@ footer {
 .H7 {grid-column: span 7;}
 .H8 {grid-column: span 8;}
 
-.V1 {min-height: calc(var(--bentosize)); grid-row: span 1;}
-.V2 {min-height: calc(var(--bentosize) * 2 + var(--gap)); grid-row: span 2;}
-.V3 {min-height: calc(var(--bentosize) * 3 + var(--gap) * 2); grid-row: span 3;}
-.V4 {min-height: calc(var(--bentosize) * 4 + var(--gap) * 3); grid-row: span 4;}
-.V5 {min-height: calc(var(--bentosize) * 5 + var(--gap) * 4); grid-row: span 5;}
-.V6 {min-height: calc(var(--bentosize) * 6 + var(--gap) * 5); grid-row: span 6;}
-.V7 {min-height: calc(var(--bentosize) * 7 + var(--gap) * 6); grid-row: span 7;}
-.V8 {min-height: calc(var(--bentosize) * 8 + var(--gap) * 7); grid-row: span 8;}
+.V1 {min-height: calc(var(--bentosizevertical)); grid-row: span 1;}
+.V2 {min-height: calc(var(--bentosizevertical) * 2 + var(--gap)); grid-row: span 2;}
+.V3 {min-height: calc(var(--bentosizevertical) * 3 + var(--gap) * 2); grid-row: span 3;}
+.V4 {min-height: calc(var(--bentosizevertical) * 4 + var(--gap) * 3); grid-row: span 4;}
+.V5 {min-height: calc(var(--bentosizevertical) * 5 + var(--gap) * 4); grid-row: span 5;}
+.V6 {min-height: calc(var(--bentosizevertical) * 6 + var(--gap) * 5); grid-row: span 6;}
+.V7 {min-height: calc(var(--bentosizevertical) * 7 + var(--gap) * 6); grid-row: span 7;}
+.V8 {min-height: calc(var(--bentosizevertical) * 8 + var(--gap) * 7); grid-row: span 8;}
 
 /* BENTO SIZES -----------------------------------*/
 
 /* BENTO STYLES -----------------------------------*/
 
-/* .B0 {nothing} LEFT */
-.B1 {justify-content: space-between; text-align: center; .Component {justify-content: center;}} /* CENTER */
-.B2 {text-align: right; .Component {justify-content: flex-end;}} /* RIGHT */
-.B3 {justify-content: space-between;} /* LEFT */
-.B4 {justify-content: center; text-align: center; .Component {justify-content: center;}} /* CENTER */
-.B5 {justify-content: space-between; align-items: right; text-align: right; .Component {justify-content: flex-end;}} /* RIGHT */
-.B6 {justify-content: flex-end;} /* LEFT */
-.B7 {justify-content: flex-end; align-items: right; text-align: right; .Component {justify-content: flex-end;}} /* RIGHT */
-.B8 {justify-content: space-between; > .Component {justify-content: flex-end;}} /* LEFT */
-.B9 {justify-content: space-between; text-align: right;} /* RIGHT */
+.BL1 > .Statement > .Limg {justify-content: left;}
+.BL2 {justify-content: center; .Statement > .Limg {justify-content: left;}}
+.BL3 {justify-content: end; .Statement > .Limg {justify-content: left;}}
+.BL4 {justify-content: space-between; .Statement > .Limg {justify-content: left;}}
+.BL5 {justify-content: space-between; .Component {justify-content: flex-end;} .Statement > .Limg {justify-content: left;}}
+
+.BR1 {text-align: right; > .Component, .Statement > .Limg {justify-content: right;}}
+.BR2 {justify-content: center; text-align: right; > .Component, .Statement > .Limg {justify-content: right;}}
+.BR3 {justify-content: end; text-align: right; > .Component, .Statement > .Limg {justify-content: right;}}
+.BR4 {justify-content: space-between; text-align: right; > .Component, .Statement .Limg {justify-content: right;}}
+.BR5 {justify-content: space-between; text-align: right; > .Statement .Limg {justify-content: right;}}
+
+.BC1 {justify-content: top; text-align: center; .Component, .Statement .Limg {justify-content: center;}}
+.BC2 {justify-content: center; text-align: center; .Component, .Statement .Limg {justify-content: center;}}
+.BC3 {justify-content: end; text-align: center; .Component, .Statement .Limg {justify-content: center;}}
+
+.BE1 {justify-content: center; > .Statement { flex-direction: row; gap: var(--gap); align-items: center;}}
 
 /* BENTO STYLES -----------------------------------*/
 
 /* COMPONENTS -----------------------------------*/
+
 .Button, 
 .Download,
 .Switch input {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: var(--size);
-  min-height: calc(var(--size) / 2);
+  width: calc(var(--size) * 2);
+  min-height: var(--size);
   cursor: pointer;
   border-radius: 100px;
   position: relative;
@@ -302,17 +375,17 @@ footer {
 }
 
 .Switch {
-  height: calc(var(--size) / 2);
+  height: var(--size);
 }
 
 .Switch > input::before {
   display: flex;
   justify-content: center;
   align-items: center;
-  content: '';
+  content: "";
   position: absolute;
-  width: calc(var(--size) / 2);
-  height: calc(var(--size) / 2);
+  width: var(--size);
+  height: var(--size);
   left: 0;
   top: 50%;
   transform: translateY(-50%) scale(0.7);
@@ -323,87 +396,101 @@ footer {
   left: 50%;
 }
 
-.ThemeSwitch input::before {
-  font-size: 2rem;
-  content: '';
+.ThemeSwitch > input::before {
+  top: 48%;
+  content: "🌚";
+  font-size: 2.4rem;
 }
 
 .ThemeSwitch input:checked::before {
-  content: '';
+  content: "🌞";
 }
 
 .LanguageSwitch input::before {
-  content: 'EN';
+  content: "EN";
+  font-weight: bold;
 }
 
 .LanguageSwitch input:checked::before {
-  content: 'ES';
-}
-
-.MapComponent:hover > .Text {
-   display: none;
-}
-
-.MapComponent .Map {
-  z-index: 100;
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  object-fit: cover;
-  object-position: center;
-}
-
-.MapComponent .Map div.mapboxgl-ctrl-bottom-right,
-.MapComponent .Map div.mapboxgl-ctrl-bottom-left {
-  display: none;
-}
-
-.MapComponent .Text {
-  position: absolute;
-  top: 0;
+  content: "ES";
+  font-weight: bold;
 }
 
 /* COMPONENTS -----------------------------------*/
 
 /* RESPONSIVE -----------------------------------*/
 
-@media (width > 0) and (width <= 570px) {
-
-  .Nav {top: -150px;} /*oculta el navbar*/
-
+@media (width > 0) and (width <= 530px) {
+  header {justify-content: space-between;}
+  header > .Nav {display: none;}
+  .Article {margin: 0;}
+  .Article > .TextArticle {margin: 50px var(--gap) var(--gap);}
   .BentoGrid {grid-template-columns: repeat(4, 1fr);}
+  .H5, .H6, .H7, .H8 {grid-column: span 4;}
+  .Bento > .PB {min-height: 5px;}
+  .Bento > .Statement {row-gap: 10px;}
 
-  .H5 {grid-column: span 4;}
-  .H6 {grid-column: span 4;}
-  .H7 {grid-column: span 4;}
-  .H8 {grid-column: span 4;}
-
+  .ThemeSwitch > input::before {font-size: 2rem;}
+  h1, span {font-size: 1.6rem;}
+  h4 {font-size: 0.81rem;}
+  p {font-size: 0.76rem; line-height: 25px;}
+  .Button, .Download > span {font-size: 0.65rem;}
+  #Presentation > .Statement > .Text > p {line-height: 25px;}
 }
 
-@media (width > 570px) and (width <= 770px) {
+@media (width > 530px) and (width <= 833px) {
+  #Responsive_Component {display: none;}
+  header > .Nav {display: none;}
+  .Article {margin: 30px 0 0 0;}
+  .Article > .TextArticle {margin: 60px var(--gap) var(--gap);}
+  .BentoGrid {grid-template-columns: repeat(4, 1fr);}
+  .H5, .H6, .H7, .H8 {grid-column: span 4;}
+  .Bento > .PB {min-height: 7px;}
 
-  .Nav {top: -150px;} /*oculta el navbar*/
-
-  .BentoGrid {grid-template-columns: repeat(8, 1fr);}
-
+  h1, span {font-size: 1.8rem;}
+  h4 {font-size: 1rem;}
+  p, a {font-size: 0.8rem; line-height: 30px;}
+  .Button, .Download > span {font-size: 0.65rem;}
 }
 
-@media (width > 770px) and (width <= 1164px) {
-
-  .Nav {top: -150px;} /*oculta el navbar*/
-
+@media (width > 833px) and (width <= 1164px) {
+  .Article {margin: 40px 0 0 0;}
+  .Article > .TextArticle {margin: 70px var(--gap) var(--gap);}
   .BentoGrid {grid-template-columns: repeat(8, 1fr);}
+  .Bento > .PB {min-height: 8px;}
 
-  .BentoGrid {width: calc(100% - var(--gap));}
+  h1, span {font-size: 2rem;}
+  h4 {font-size: 0.9rem;}
+  p, a {font-size: 0.7rem; line-height: 25px;}
+  .Button, .Download > span {font-size: 0.8rem;}
+}
 
+@media (width < 1020px) {
+
+  .V1 {min-height: calc(var(--bentosizevertical)); grid-row: span 1;}
+  .V2 {min-height: calc(var(--bentosizevertical) * 2 ); grid-row: span 2;}
+  .V3 {min-height: calc(var(--bentosizevertical) * 3 ); grid-row: span 3;}
+  .V4 {min-height: calc(var(--bentosizevertical) * 4 ); grid-row: span 4;}
+  .V5 {min-height: calc(var(--bentosizevertical) * 5 ); grid-row: span 5;}
+  .V6 {min-height: calc(var(--bentosizevertical) * 6 ); grid-row: span 6;}
+  .V7 {min-height: calc(var(--bentosizevertical) * 7 ); grid-row: span 7;}
+  .V8 {min-height: calc(var(--bentosizevertical) * 8 ); grid-row: span 8;}
+}
+
+@media (width > 1020px) {
+  h1, span {font-size: 2rem;}
+  h4 {font-size: 1.2rem;}
+  p, a {font-size: 0.9rem; line-height: 30px;}
+  .Button, .Download > span {font-size: 0.8rem;}
 }
 
 @media (width > 1164px) {
-
-  .Article .TextArticle {max-width: 800px;}
-
+  .Article {margin: 40px 0 0 0;}
+  .Article > .TextArticle {max-width: 800px; margin: 90px var(--gap) var(--gap);}
   .BentoGrid {grid-template-columns: repeat(8, 1fr);}
 
+  .Bento > .Statement {gap: var(--gap);}
+  .Bento > .PB {min-height: 10px;}
 }
 
 /* RESPONSIVE -----------------------------------*/

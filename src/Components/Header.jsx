@@ -28,7 +28,7 @@ export default function Header ({cb, links}) {
       </nav>
       <div>
         <p className='CreatedBy'>{cb}</p>
-        <a className='Me' href='https://franciscobuchini.vercel.app/' target='_blank'>Francisco Buchini</a>
+        <a className="Me" href="https://franciscobuchini.vercel.app/" target="_blank">Francisco Buchini</a>
       </div>
     </header>
   )

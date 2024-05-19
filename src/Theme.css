@@ -1,61 +1,25 @@
 :root {
   --primary: #118ab2;
   --secondary: #A13D63;
+  --tertiary: #34BF49;
   --light: #F7F2F2;
+  --lightTertiary: #eff7f0;
   --white: #FFFFFF;
-  --black: #1E1E1E;
+  --black: #090C10;
+  --dark: #1E1E1E;
+  --transparent15primary: #602e2e20;
   --transparent15dark: rgba(0, 0, 0, 0.15);
   --transparent30dark: rgba(0, 0, 0, 0.30);
+  --transparent03light: rgba(255, 255, 255, 0.03);
   --transparent15light: rgba(255, 255, 255, 0.15);
   --transparent30light: rgba(255, 255, 255, 0.30);
   --transparent: #00000000;
-
+  --stroke: #535252;
 }
 
-/* THEME LIGHT -------------------------------------------------------*/
+/* LIGHT THEME -------------------------------------------------------*/
 body {
-  background-color: var(--light);
-  color: var(--black);
-}
-
-.BentoGrid {
-  background-color: var(--transparent30light);
-  border: 1px solid var(--transparent15dark);
-}
-
-.Bento,
-.MapComponent {
-  background-color: var(--white);
-  outline: none;
-}
-
-.Bento:hover,
-.MapComponent:hover {
-  outline: 4px solid var(--primary);
-}
-
-.Bento .Text h4,
-.Bento .Text h5,
-.Bento .Text p,
-.Map .Text h4,
-.Map .Text p {
-  color: var(--black);
-}
-
-.Transparent {
-  outline: none;
-}
-
-.Transparent:hover {
-  outline: none;
-}
-
-.CreatedBy {
-  color: var(--transparent30dark);
-}
-
-.Me {
-  color: var(--primary);
+  background-color: var(--lightTertiary);
 }
 
 header nav {
@@ -71,94 +35,128 @@ header svg path {
   fill: var(--transparent30dark);
 }
 
-.Article .TextArticle h1,
-.Article .TextArticle p {
-  color: var(--black);
+.Article > .TextArticle {
+  color: var(--stroke);
 }
 
-.Button,
-.Switch input {
-  background-color: var(--transparent15dark);
-  color: var(--white);
+.Article > .BentoGrid {
+  background-color: var(--white);
+  border: 1px solid var(--primary);
 }
 
-.Button:hover,
-.Switch input:hover {
+#Presentation > .Statement > .Text > p {
+  color: var(--stroke);
+}
+
+.Bento > .ImageBack {
+  opacity: 0.5;
+  @media (width <= 833px) {opacity: 0.3;}
+}
+
+.Bento,
+.MapComponent {
+  background-color: var(--lightTertiary);
+  outline: 1px solid var(--transparent15dark);
+}
+
+.Bento:hover,
+.MapComponent:hover {
+  background-color: var(--lightTertiary);
+  outline: 1px solid var(--primary);
+}
+
+.Bento > .Statement > .Text > h4,
+.MapComponent > .Text > h4 {
+  color: var(--stroke);
+}
+
+.Bento > .Statement > .Text > p,
+.MapComponent > .Text > p {
+  color: var(--stroke);
+}
+
+.Limg > img {
+  opacity: 0.8;
+  filter: invert(80%)
+}
+
+#Flag > .Statement > .Limg > img {
+  opacity: 1;
+  filter: invert(0%)
+}
+
+.PBd {
   background-color: var(--transparent15dark);
+}
+
+.PBn {
+  background-color: var(--transparent15dark);
+}
+
+.Transparent, .Transparent:hover {
+  outline: none;
+}
+
+.Transparent > .Statement > .Text > h4 {
+  color: var(--stroke);
+}
+
+.CreatedBy {
+  color: var(--dark);
+}
+
+.Me {
   color: var(--primary);
 }
 
-.Switch input:checked {
+.Button, .Switch > input, .Switch > input:checked {
   background-color: var(--transparent15dark);
+  color: var(--white);
 }
 
-.Switch input::before {
-  background-color: var(--white);
-  color: var(--black);
+.Button:hover, .Switch > input:hover, .Switch > input:checked:hover {
+  background-color: var(--transparent30dark);
 }
 
-.Switch input:hover::before {
+.Switch > input::before, .Switch > input:checked::before {
+  background-color: var(--stroke);
+  color: var(--white);
+}
+
+.Switch > input:hover::before, .Switch > input:checked:hover::before {
+  background-color: var(--stroke);
+  color: var(--white);
+}
+
+header > .Header_Components > .Component > .Switch > input,
+header > .Header_Components > .Switch > input:checked {
+  background-color: var(--lightTertiary);
+  border: 1px solid var(--transparent15dark);
+}
+
+header > .Header_Components > .Component > .Switch > input:hover,
+header > .Header_Components > .Component > .Switch > input:checked:hover {
+  border: 1px solid var(--primary);
+  background-color: var(--lightTertiary);
+}
+
+header > .Header_Components > .Component > .Switch > input::before,
+header > .Header_Components > .Component > .Switch > input:checked::before {
   background-color: var(--primary);
   color: var(--white);
 }
 
-.Switch input:checked::before {
-  background-color: var(--white);
-  color: var(--black);
-}
+header > .Header_Components > .Component > .Switch > input:hover::before,
+header > .Header_Components > .Component > .Switch > input:checked:hover::before {}
+/* LIGHT THEME -------------------------------------------------------*/
 
-.PBimg img {
-  opacity: 1;
-}
+/* DARK THEME -------------------------------------------------------*/
+[data-theme="dark"] {
 
-.PB100 {
-  background-color: var(--transparent15dark);
-}
-
-.PBX {
-  background-color: var(--primary);
-}
-/* THEME LIGHT -------------------------------------------------------*/
-
-/* THEME DARK -------------------------------------------------------*/
-[data-theme='dark'] {
   body {
-    background-color: var(--black);
-    color: var(--white);
+    background-color: var(--dark);
   }
-
-  .BentoGrid {
-    background-color: var(--transparent30dark);
-    border: 1px solid var(--transparent15light);
-  }
-
-  .Bento,
-  .MapComponent {
-    background-color: var(--transparent);
-    outline: none;
-  }
-
-  .Bento:hover,
-  .MapComponent:hover {
-    outline: 4px solid var(--secondary);
-  }
-
-  .Bento .Text h4,
-  .Bento .Text h5,
-  .Bento .Text p,
-  .Map .Text h4,
-  .Map .Text p {
-    color: var(--white);
-  }
-
-  .CreatedBy {
-    color: var(--transparent30light);
-  }
-
-  .Me {
-    color: var(--secondary);
-  }
-
+  
   header nav {
     background-color: var(--transparent15dark);
     color: var(--white);
@@ -171,62 +169,126 @@ header svg path {
   header svg path {
     fill: var(--transparent15light);
   }
-
-  .Article .TextArticle h1,
-  .Article .TextArticle p {
+  
+  .Article > .TextArticle {
+    color: var(--light);
+    opacity: 1;
+  }
+  
+  .BentoGrid {
+    background-color: var(--black);
+    border: 1px solid var(--secondary);
+  }
+  
+  #Presentation > .Statement > .Text > p {
+    color: var(--white);
+    opacity: 1;
+  }
+  
+  .Bento > .ImageBack {
+    opacity: 0.3;
+  }
+  
+  .Bento,
+  .MapComponent {
+    background-color: var(--dark);
+    outline: 1px solid var(--transparent30light);
+  }
+  
+  .Bento:hover,
+  .MapComponent:hover {
+    background-color: var(--transparent15primary);
+    outline: 1px solid var(--secondary);
+  }
+  
+  .Bento > .Statement > .Text > h4,
+  .MapComponent > .Text > h4 {
     color: var(--white);
   }
-
-  .Button,
-  .Switch input {
-    background-color: var(--transparent30dark);
+  
+  .Bento > .Statement > .Text > p,
+  .MapComponent > .Text > p {
     color: var(--white);
+    opacity: 0.8;
   }
-
-  .Button:hover,
-  .Switch input:hover {
-    background-color: var(--transparent30dark);
-    color: var(--secondary);
+  
+  .Limg > img {
+    opacity: 0.8;
+    filter: invert(0%)
   }
-
-  .Switch input:checked {
-    background-color: var(--transparent30dark);
-  }
-
-  .Switch input::before {
-    background-color: var(--white);
-    color: var(--black);
-  }
-
-  .Switch input:hover::before {
-    background-color: var(--secondary);
-    color: var(--white);
-  }
-
-  .Switch input:checked::before {
-    background-color: var(--white);
-    color: var(--black);
-  }
-
-  .PBimg img {
-    opacity: 0.7;
-  }
-
-  .PB100 {
+  
+  .PBd {
     background-color: var(--transparent15light);
   }
-
-  .PBX {
+  
+  .PBn {
     background-color: var(--secondary);
   }
-
-  .Transparent {
+  
+  .Transparent, .Transparent:hover {
     outline: none;
   }
   
-  .Transparent:hover {
-    outline: none;
+  .CreatedBy {
+    color: var(--white);
   }
+  
+  .Me {
+    color: var(--secondary);
+  }
+
+  .Button, .Switch > input, .Switch > input:checked {
+    background-color: var(--transparent15light);
+    color: var(--dark);
+  }
+  
+  .Button:hover, .Switch > input:hover, .Switch > input:checked:hover {
+    background-color: var(--transparent30light);
+    color: var(--white);
+  }
+  
+  .Switch > input::before, .Switch > input:checked::before {
+    background-color: var(--secondary);
+    color: var(--white);
+  }
+  
+  .Switch > input:hover::before, .Switch > input:checked:hover::before {
+    background-color: var(--secondary);
+    color: var(--white);
+  }
+
+  header > .Header_Components > .Component > .Switch > input,
+  header > .Header_Components > .Switch > input:checked {
+    background-color: var(--dark);
+    border: 2px solid var(--stroke);
+  }
+
+  header > .Header_Components > .Component > .Switch > input:hover,
+  header > .Header_Components > .Component > .Switch > input:checked:hover {
+    border: 2px solid var(--secondary);
+    background-color: var(--dark);
+  }
+
+  header > .Header_Components > .Component > .Switch > input::before,
+  header > .Header_Components > .Component > .Switch > input:checked::before {
+    background-color: var(--black);
+    color: var(--stroke);
+  }
+
+  header > .Header_Components > .Component > .Switch > input:hover::before,
+  header > .Header_Components > .Component > .Switch > input:checked:hover::before {}
+
 }
 
-/* THEME DARK -------------------------------------------------------*/
+
+header > .Header_Components > .Component > .ThemeSwitch > input::before,
+.Bento > .Component > .ThemeSwitch > input::before {
+  background-color: transparent;
+}
+
+header > .Header_Components > .Component > .ThemeSwitch > input:checked::before,
+.Bento > .Component > .ThemeSwitch > input:checked::before {
+  background-color: transparent;
+}
+
+/* SECONDARY THEME -------------------------------------------------------*/
