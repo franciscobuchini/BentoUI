@@ -5,7 +5,7 @@ import mapboxgl from "mapbox-gl";
 export default function Map({ Bs, Bv, Bh, Th4, Tp, theme }) {
   const mapContainer = useRef(null);
   mapboxgl.accessToken = "pk.eyJ1IjoiZnJhbmNpc2NvYnVjaGluaSIsImEiOiJjbHZsNng5djUxdXVvMmtvb2NoZzcza3VnIn0.jTm58Ue65TyJ9ToHbiwMHg";
-  const light = "mapbox://styles/franciscobuchini/clvldwnu1017x01q1buz0fg6v";
+  const light = "mapbox://styles/franciscobuchini/clw9oydkm008h01q1a7w98vwy";
   const dark = "mapbox://styles/franciscobuchini/clvlavqq900fj01obdjam2o77";
   
   const style = theme === "light" ? light : dark;
