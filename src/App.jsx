@@ -137,7 +137,7 @@ function App() {
         <Bento Bv='1' Bh='4' Bs='BC2' Th4={lang[language].theme} Com={() => <ThemeSwitch onChange={handleThemeSwitch} />} />
       </BentoGrid>
 
-      <BentoGrid id='News' TAh1={lang[language].h1_article1} TAp={lang[language].p_article1}>
+      <BentoGrid id='News'>
         <Bento Bv='1' Bh='8' Bs='BL2' Bbgc='transparent' Th4={lang[language].h4_bento0} Tp={lang[language].p_bento0} />
         <Bento Bv='1' Bh='8' Bs='BL2' Bbgc='transparent' Th4={lang[language].h4_bento2} Tp={lang[language].p_bento2} />
         <Map Bv='3' Bh='8' Bs='BL1' Th4={lang[language].h4_map} Tp={lang[language].p_map} theme={theme} />
